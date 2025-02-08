@@ -11,10 +11,29 @@ export class AuthRepository {
         private readonly userRepository: Repository<User>
     ) {}
 
+    async findAllUsers(): Promise<User[]> 
+    {
+        return this.userRepository.find();
+    }
 
     async findOneByEmail(email: string): Promise<User | null> 
     {
         return this.userRepository.findOne({ where: { email } });
+    }
+
+    create(user: Partial<User>): User
+    {
+        return this.userRepository.create(user);
+    }
+
+    async save(user: User): Promise<User>  
+    {
+        return this.userRepository.save(user);
+    }
+
+    async findOne(id: number): Promise<User | null> 
+    {
+        return this.userRepository.findOne({ where: { id } });
     }
 
 }
